@@ -5,6 +5,12 @@
 HeatWave is an in-memory query accelerator developed for the MySQL Database Service, and is available only in Oracle Cloud Infrastructure. MySQL Database Service with HeatWave enables you to run online transactional processing (OLTP) and online analytical processing (OLAP) workloads directly from a MySQL database without any changes to the applications. This eliminates the need for a separate analytics database.
 HeatWave supports the same BI and data visualization tools as MySQL Database. With Oracle Analytics Cloud, data analysts can analyze data and build reports in real-time.
 
+For details of the architecture, see [_Use Oracle Analytics Cloud service with MySQL HeatWave_](https://docs.oracle.com/en/solutions/oac-with-heatwave/index.html)
+
+## Architecture Topology Diagram
+
+![](./images/architecture-oac-heatwave.png)
+
 ## Prerequisites
 
 - Permission to `manage` the following types of resources in your Oracle Cloud Infrastructure tenancy: `vcns`, `internet-gateways`, `route-tables`, `security-lists`, `subnets`, `mysql-family`, and `instances`.

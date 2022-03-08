@@ -182,6 +182,7 @@ variable "analytics_instance_name" {
 }
 
 variable "analytics_whitelisted_ips" {
+  type    = list(string)
   default = ["0.0.0.0/0"]
 }
 

@@ -24,7 +24,7 @@ variableGroups:
     - mysql_db_system_maintenance_window_start_time
     - mysql_db_system_hostname_label
     - mysql_db_system_fault_domain
-    - analytics_whitelisted_ips
+
 
   - title: Required Variables
     visible: true
@@ -32,6 +32,7 @@ variableGroups:
     - compartment_ocid
     - availability_domain_name
     - analytics_instance_idcs_access_token
+    - analytics_whitelisted_ips
     - admin_password
     - magento_password
     - magento_admin_password 
@@ -343,6 +344,18 @@ variables:
     default: "Oracle Linux"
     enum:
       - "Oracle Linux"
+
+  analytics_whitelisted_ips:
+    type: array
+    items:
+      type: string
+      pattern: "^[0-9\\-\\.]+$"
+    required: true
+    title: "Public IPs whitelisted for OAC"
+    default: ["0.0.0.0"]
+    minItems: 1
+    uniqueItems: true
+    description: "Define Public IPs whitelisted for access OAC from public Internet."
 
   analytics_instance_capacity_capacity_type:
     type: enum

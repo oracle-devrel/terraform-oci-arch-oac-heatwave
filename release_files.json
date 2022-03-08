@@ -2,7 +2,7 @@
 [
     {
       "action": "create_zip",
-      "file_name": "terraform-oci-arch-magento-oac-heatwave-latest.zip",
+      "file_name": "terraform-oci-arch-oac-heatwave-stack-latest.zip",
       "files": [
         {
           "src_pattern": "*.tf",

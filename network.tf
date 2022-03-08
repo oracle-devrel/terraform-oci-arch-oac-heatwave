@@ -78,9 +78,9 @@ resource "oci_core_security_list" "public_security_list_ssh" {
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
-resource "oci_core_security_list" "public_security_list_http" {
+resource "oci_core_security_list" "magento_security_list" {
   compartment_id = var.compartment_ocid
-  display_name   = "Allow HTTP(S) to magento"
+  display_name   = "magento_security_list"
   vcn_id         = oci_core_virtual_network.oac_heatwave_vcn.id
   egress_security_rules {
     destination = "0.0.0.0/0"
@@ -105,9 +105,9 @@ resource "oci_core_security_list" "public_security_list_http" {
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
-resource "oci_core_security_list" "private_security_list" {
+resource "oci_core_security_list" "db_security_list" {
   compartment_id = var.compartment_ocid
-  display_name   = "Private"
+  display_name   = "db_security_list"
   vcn_id         = oci_core_virtual_network.oac_heatwave_vcn.id
 
   egress_security_rules {
@@ -181,7 +181,7 @@ resource "oci_core_security_list" "private_security_list" {
       min = 80
     }
     protocol = "6"
-    source   = var.vcn_cidr
+    source   = "0.0.0.0/0"
   }
 
   ingress_security_rules {
@@ -190,7 +190,7 @@ resource "oci_core_security_list" "private_security_list" {
       min = 443
     }
     protocol = "6"
-    source   = var.vcn_cidr
+    source   = "0.0.0.0/0"
   }
 
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
@@ -202,22 +202,22 @@ resource "oci_core_subnet" "magento_subnet" {
   compartment_id             = var.compartment_ocid
   vcn_id                     = oci_core_virtual_network.oac_heatwave_vcn.id
   route_table_id             = oci_core_route_table.public_route_table.id
-  security_list_ids          = [oci_core_security_list.public_security_list_ssh.id, oci_core_security_list.public_security_list_http.id]
+  security_list_ids          = [oci_core_security_list.magento_security_list.id, oci_core_security_list.public_security_list_ssh.id]
   dhcp_options_id            = oci_core_virtual_network.oac_heatwave_vcn.default_dhcp_options_id
   prohibit_public_ip_on_vnic = false
   dns_label                  = "magsub"
   defined_tags               = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
-resource "oci_core_subnet" "db_subnet" {
+resource "oci_core_subnet" "oac_db_subnet" {
   cidr_block                 = cidrsubnet(var.vcn_cidr, 8, 2)
-  display_name               = "db_subnet"
+  display_name               = "oac_db_subnet"
   compartment_id             = var.compartment_ocid
   vcn_id                     = oci_core_virtual_network.oac_heatwave_vcn.id
   route_table_id             = oci_core_route_table.public_route_table.id
-  security_list_ids          = [oci_core_security_list.private_security_list.id]
+  security_list_ids          = [oci_core_security_list.db_security_list.id]
   dhcp_options_id            = oci_core_virtual_network.oac_heatwave_vcn.default_dhcp_options_id
-  prohibit_public_ip_on_vnic = false
+  prohibit_public_ip_on_vnic = true
   dns_label                  = "dbsub"
   defined_tags               = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

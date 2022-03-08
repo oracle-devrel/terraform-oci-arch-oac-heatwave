@@ -11,86 +11,85 @@ variableGroups:
   - title: "General Configuration"
     visible: false
     variables:
-      - tenancy_ocid
-      - region
-      - ssh_authorized_keys_path
-      - ssh_private_key_path
-      - private_key_path
-      - release
-      - node_image_id
-      - label_prefix
-      - mysql_db_system_display_name
-      - mysql_db_system_description
-      - mysql_db_system_maintenance_window_start_time
-      - mysql_db_system_hostname_label
-      - mysql_db_system_fault_domain
-      - analytics_whitelisted_ips
+    - tenancy_ocid
+    - region
+    - ssh_authorized_keys_path
+    - ssh_private_key_path
+    - private_key_path
+    - release
+    - node_image_id
+    - label_prefix
+    - mysql_db_system_display_name
+    - mysql_db_system_description
+    - mysql_db_system_maintenance_window_start_time
+    - mysql_db_system_hostname_label
+    - mysql_db_system_fault_domain
+    - analytics_whitelisted_ips
 
   - title: Required Variables
     visible: true
     variables:
-      - compartment_ocid
-      - availability_domain_name
-      - analytics_instance_idcs_access_token
-      - admin_password
-      - numberOfNodes
-      - magento_password
-      - magento_admin_password 
-      - magento_admin_email 
-      - show_advanced
+    - compartment_ocid
+    - availability_domain_name
+    - analytics_instance_idcs_access_token
+    - admin_password
+    - magento_password
+    - magento_admin_password 
+    - magento_admin_email 
+    - show_advanced
 
   - title: Network Optional Configuration
     visible: 
-        and:
-          - show_advanced
+      and:
+        - show_advanced
     variables:
-      - vcn
-      - vcn_cidr
+    - vcn
+    - vcn_cidr
 
   - title: Compute Optional Configuration
     visible: 
-        and:
-          - show_advanced
+      and:
+        - show_advanced
     variables:
-      - ssh_public_key
-      - node_shape
-      - instance_os
-      - linux_os_version
-      - node_flex_shape_ocpus
-      - node_flex_shape_memory  
+    - ssh_public_key
+    - node_shape
+    - instance_os
+    - linux_os_version
+    - node_flex_shape_ocpus
+    - node_flex_shape_memory  
 
   - title: Magento Optional Configuration
     visible: 
-        and:
-          - show_advanced
+      and:
+        - show_advanced
     variables:
-      - magento_instance_name
-      - magento_name
-      - magento_schema
+    - magento_instance_name
+    - magento_name
+    - magento_schema
 
   - title: MDS & HeatWawe Optional Configuration
     visible: 
-        and:
-          - show_advanced
+      and:
+        - show_advanced
     variables:
-      - admin_username
-      - mysql_shape      
-      - mds_instance_name
-      - mysql_db_system_data_storage_size_in_gb
-      - mysql_is_highly_available
-      - mysql_heatwave_cluster_size
-      - mysql_heatwave_shape
+    - admin_username
+    - mysql_shape      
+    - mds_instance_name
+    - mysql_db_system_data_storage_size_in_gb
+    - mysql_is_highly_available
+    - mysql_heatwave_cluster_size
+    - mysql_heatwave_shape
 
-   - title: OAC Optional Configuration
-      visible: 
-          and:
-           - show_advanced
-      variables: 
-      - analytics_instance_capacity_capacity_type
-      - analytics_instance_capacity_capacity_value
-      - analytics_instance_feature_set
-      - analytics_instance_license_type
-      - analytics_instance_name
+  - title: OAC Optional Configuration
+    visible: 
+      and:
+        - show_advanced
+    variables: 
+    - analytics_instance_capacity_capacity_type
+    - analytics_instance_capacity_capacity_value
+    - analytics_instance_feature_set
+    - analytics_instance_license_type
+    - analytics_instance_name
 
 variables:
 
@@ -116,22 +115,12 @@ variables:
   availability_domain_name:
     type: oci:identity:availabilitydomain:name
     required: true
-    visibile: true
+    visible: true
     title: "Availability Domain to be chosen"
     description: "Choose Availability Domain where your Magento and MDS will be deployed."
     dependsOn:
       regionName: ${region}
       compartmentId: ${compartment_ocid}
-
-  numberOfNodes:
-    type: number
-    required: false
-    minimum: 1
-    maximum: 128
-    multipleOf: 1
-    default: 2
-    title: "How many Magento Nodes?"
-    description: "Choose number of Magento Nodes to be deployed (more then one will create LoadBalancer)."
 
   analytics_instance_idcs_access_token:
     type: text
@@ -279,17 +268,6 @@ variables:
     title: MySQL Magento Schema
     description: MySQL Schema/Database for Magento
 
-  use_shared_storage:
-    type: boolean
-    visible:
-      gt:
-        - numberOfNodes
-        - 1
-    default: true
-    required: false
-    title: "Use OCI File Storage Service"
-    description: "Check the box to use OCI FSS for Magento multinode setup (shared Magento directory)."
-
   mysql_shape:
     type: enum
     required: false
@@ -399,7 +377,7 @@ variables:
 
   analytics_instance_name:
     type: string
-    default: "OAC"
+    default: "OAC4MDSHW"
     visible: true
     required: false
     title: "OAC instance name"

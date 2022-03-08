@@ -14,10 +14,21 @@ resource "oci_analytics_analytics_instance" "oac_for_heatwave" {
     }
     network_endpoint_details {
         network_endpoint_type = "PUBLIC"
+        whitelisted_ips = var.analytics_whitelisted_ips
         whitelisted_vcns {
             id = oci_core_virtual_network.oac_heatwave_vcn.id
-            whitelisted_ips = var.analytics_whitelisted_ips
         }
     }
     defined_tags = {"${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+}
+
+resource "oci_analytics_analytics_instance_private_access_channel" "oac_for_heatwave_private_access_channel" {
+    analytics_instance_id = oci_analytics_analytics_instance.oac_for_heatwave.id
+    display_name = "oac4heatwave_pac"
+    private_source_dns_zones {
+        dns_zone = "oachwvcn.oraclevcn.com"
+        description = "Access to MDS from OAC"
+    }
+    subnet_id = oci_core_subnet.oac_db_subnet.id
+    vcn_id = oci_core_virtual_network.oac_heatwave_vcn.id
 }

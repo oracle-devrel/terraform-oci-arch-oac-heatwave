@@ -178,13 +178,12 @@ variable "analytics_instance_license_type" {
 }
 
 variable "analytics_instance_name" {
-  default = "oac4heatwave1"
+  default = "oac4heatwave"
 }
 
 variable "analytics_whitelisted_ips" {
   default = ["0.0.0.0/0"]
 }
-
 
 variable "analytics_instance_idcs_access_token" {}
 

@@ -3,6 +3,7 @@
     {
       "action": "create_zip",
       "file_name": "terraform-oci-arch-oac-heatwave-stack-latest.zip",
+
       "files": [
         {
           "src_pattern": "*.tf",

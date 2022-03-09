@@ -349,10 +349,10 @@ variables:
     type: array
     items:
       type: string
-      pattern: "^[0-9\\-\\.]+$"
+      pattern: "^[0-9\\-\\.\\/]+$"
     required: true
     title: "Public IPs whitelisted for OAC"
-    default: ["0.0.0.0"]
+    default: ["0.0.0.0/0"]
     minItems: 1
     uniqueItems: true
     description: "Define Public IPs whitelisted for access OAC from public Internet."
@@ -376,6 +376,7 @@ variables:
     description: "Oracle Analytics Cloud (OAC) instance feature set"
     enum:
       - "ENTERPRISE_ANALYTICS"
+      - "SELF_SERVICE_ANALYTICS"
 
   analytics_instance_license_type: 
     type: enum
@@ -390,7 +391,7 @@ variables:
 
   analytics_instance_name:
     type: string
-    default: "OAC4MDSHW"
+    default: "OAC4MDSHW1"
     visible: true
     required: false
     title: "OAC instance name"

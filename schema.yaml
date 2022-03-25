@@ -67,6 +67,7 @@ variableGroups:
     - magento_instance_name
     - magento_name
     - magento_schema
+    - magento_backend_frontname
 
   - title: MDS & HeatWawe Optional Configuration
     visible: 
@@ -268,6 +269,12 @@ variables:
     required: true
     title: MySQL Magento Schema
     description: MySQL Schema/Database for Magento
+
+  magento_backend_frontname:
+    type: string
+    required: false
+    title: Magento Backend Frontname
+    description: Magento Backend Frontname (Admin Console)
 
   mysql_shape:
     type: enum

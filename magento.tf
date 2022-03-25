@@ -21,6 +21,7 @@ module "magento" {
   magento_password          = var.magento_password
   magento_admin_password    = var.magento_admin_password
   magento_admin_email       = var.magento_admin_email
+  magento_backend_frontname = var.magento_backend_frontname
   display_name              = var.magento_instance_name
   flex_shape_ocpus          = var.node_flex_shape_ocpus
   flex_shape_memory         = var.node_flex_shape_memory

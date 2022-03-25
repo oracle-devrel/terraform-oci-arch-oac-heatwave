@@ -7,7 +7,7 @@
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.0"
+  default     = "1.1"
 }
 
 variable "ssh_public_key" {
@@ -111,6 +111,11 @@ variable "magento_password" {
 variable "magento_schema" {
   description = "Magento MySQL Schema"
   default     = "magento"
+}
+
+variable "magento_backend_frontname" {
+  description = "Magento Admin Backend Frontname"
+  default     = "magento_admin"
 }
 
 variable "mds_instance_name" {
